@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Registration</title>
+
+<style>
+    *{
+        box-sizing:border-box;
+    }
+    body{
+        margin:0;
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        font-family:Arial, sans-serif;
+        background:#f5f5f5;
+    }
+    .container{
+        width:380px;
+        padding:25px;
+        border:1px solid #333;
+        background:#fff;
+    }
+    h2{
+        text-align:center;
+        margin-bottom:20px;
+    }
+    .row{
+        margin-bottom:12px;
+    }
+    label{
+        display:block;
+        margin-bottom:4px;
+    }
+    input{
+        width:100%;
+        padding:8px;
+    }
+    .error{
+        color:red;
+        font-size:14px;
+    }
+    .success{
+        color:green;
+        text-align:center;
+        display:none;
+        margin-top:15px;
+    }
+    button{
+        width:100%;
+        padding:10px;
+        cursor:pointer;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>User Registration</h2>
+    <form id="registrationForm">
+        <div class="row">
+            <label for="userName">Name</label>
+            <input type="text" id="userName">
+            <div class="error" id="userNameError"></div>
+        </div>
+        <div class="row">
+            <label for="userEmail">Email</label>
+            <input type="text" id="userEmail">
+            <div class="error" id="userEmailError"></div>
+        </div>
+        <div class="row">
+            <label for="userPassword">Password</label>
+            <input type="password" id="userPassword">
+            <div class="error" id="userPasswordError"></div>
+        </div>
+        <div class="row">
+            <label for="confirmPass">Confirm Password</label>
+            <input type="password" id="confirmPass">
+            <div class="error" id="confirmPassError"></div>
+        </div>
+        <div class="row">
+            <label for="phoneNumber">Mobile Number</label>
+            <input type="text" id="phoneNumber">
+            <div class="error" id="phoneNumberError"></div>
+        </div>
+        <button type="submit">Register</button>
+    </form>
+    <div id="message" class="success">
+        Registration Successful!
+    </div>
+</div>
+<script>
+const form = document.querySelector("#registrationForm");
+const message = document.querySelector("#message");
+const patterns = {
+    email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    mobile: /^[6-9]\d{9}$/
+};
+function showError(id, text) {
+    document.getElementById(id).textContent = text;
+}
+function clearErrors() {
+    document.querySelectorAll(".error").forEach(item => {
+        item.textContent = "";
+    });
+}
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    clearErrors();
+    message.style.display = "none";
+    let valid = true;
+    const name = userName.value.trim();
+    const email = userEmail.value.trim();
+    const password = userPassword.value;
+    const confirmPassword = confirmPass.value;
+    const mobile = phoneNumber.value.trim();
+    if (name === "") {
+        showError("userNameError", "Please enter your name");
+        valid = false;
+    }
+    if (email === "") {
+        showError("userEmailError", "Email cannot be empty");
+        valid = false;
+    } else if (!patterns.email.test(email)) {
+        showError("userEmailError", "Enter a valid email address");
+        valid = false;
+    } else if (/^\d/.test(email)) {
+        showError("userEmailError", "Email should not begin with a digit");
+        valid = false;
+    }
+    if (password.length < 6) {
+        showError("userPasswordError", "Minimum 6 characters required");
+        valid = false;
+    }
+    if (confirmPassword === "") {
+        showError("confirmPassError", "Confirm your password");
+        valid = false;
+    } else if (password !== confirmPassword) {
+        showError("confirmPassError", "Passwords are not matching");
+        valid = false;
+    }
+    if (!patterns.mobile.test(mobile)) {
+        showError("phoneNumberError", "Enter a valid 10-digit mobile number");
+        valid = false;
+    }
+    if (valid) {
+        message.style.display = "block";
+        form.reset();
+    }
+});
+</script>
+</body>
+</html>
