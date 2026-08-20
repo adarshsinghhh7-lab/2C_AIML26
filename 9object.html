@@ -7,15 +7,32 @@
     <link rel="icon" href="data:,">
     <title>Document</title>
     <script>
-        let student = new Object();
-        student.name = "Adarsh";
-        student.id = 12;
-        student.city = "Lucknow";
-        student.learning = function () {
-            console.log("learning  Tech Courses");
+        // let student = new Object();
+        // student.name = "Adarsh";
+        // student.id = 12;
+        // student.city = "Lucknow";
+        // student.learning = function () {
+        //     console.log("learning  Tech Courses");
+        // }
+        // console.log(student.name);
+        // student.learning();
+        let student = {
+            name: "Adarsh",
+            id: 12,
+            city: "Lucknow",
+            learning: function () {
+                console.log("learning Tech Courses");
+            }
+        }
+        student.pincode = 226010
+        student.gym = function () {
+            console.log("Going to Gym");
         }
         console.log(student.name);
         student.learning();
+        console.log(student.pincode);
+        student.gym();
+        
     </script>
 </head>
 
