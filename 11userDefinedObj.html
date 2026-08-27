@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let abes = {
+            p_id: "007",
+            p_name: " Cricket Bat",
+            p_price: 12000,
+            p_quantity: 3,
+            calculatePrice: function () {
+                return this.p_price * this.p_quantity;
+            }
+        };
+        function displayProduct() {
+            let details = document.getElementById("Details");
+            details.innerHTML =
+                "ID: " + abes.p_id + "<br>" +
+                "Name: " + abes.p_name + "<br>" +
+                "Price: " + abes.p_price + " Rs.<br>" +
+                "Quantity: " + abes.p_quantity + "<br>" +
+                "Total Price: " + abes.calculatePrice() + " Rs.";
+        }
+        window.onload = function () {
+            displayProduct();
+        };
+    </script>
+</head>
+
+<body>
+    <p id="Details"></p>
+</body>
+
+</html>
